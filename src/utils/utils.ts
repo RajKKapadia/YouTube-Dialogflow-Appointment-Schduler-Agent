@@ -1,21 +1,3 @@
-import dotenv from "dotenv";
-
-dotenv.config();
-
-export const loadEnvVariables = (envPath: string = '.env'): Record<string, string> => {
-    const result = dotenv.config();
-    if (result.error) {
-        throw result.error;
-    }
-    const envVariables: Record<string, string> = {};
-    for (const key in process.env) {
-        if (Object.prototype.hasOwnProperty.call(process.env, key)) {
-            envVariables[key] = process.env[key] || '';
-        }
-    }
-    return envVariables;
-};
-
 type FulfillmentMessage = {
     text: {
         text: string[];

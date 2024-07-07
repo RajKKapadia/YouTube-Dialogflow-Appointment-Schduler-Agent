@@ -1,7 +1,9 @@
 import { google } from 'googleapis';
 import moment from 'moment-timezone';
 import { JWT } from 'google-auth-library';
-import { loadEnvVariables } from './utils';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export type CredentialsTypes = {
     type: string
@@ -23,10 +25,8 @@ export type EventDetailsTypes = {
     startTime: string
 };
 
-const envVariables = loadEnvVariables();
-
-const serviceAccount: CredentialsTypes = JSON.parse(envVariables.CREDENTIALS);
-const calendarId: string = envVariables.CALENDAR_ID;
+const serviceAccount: CredentialsTypes = JSON.parse(process.env.CREDENTIALS!);
+const calendarId: string = process.env.CALENDAR_ID!;
 
 const auth = new JWT({
     email: serviceAccount.client_email,
