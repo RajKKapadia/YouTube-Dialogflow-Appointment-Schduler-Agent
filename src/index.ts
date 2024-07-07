@@ -1,10 +1,9 @@
 import express, { Express, Request, Response, NextFunction } from "express";
-import dotenv from "dotenv";
+
 
 import healthRouter from "./routes/healthRoute";
 import dialogflowRouter from "./routes/dialogflowRoute";
-
-dotenv.config();
+import { loadEnvVariables } from "./utils/utils";
 
 const app: Express = express();
 
@@ -16,7 +15,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-const PORT: string = process.env.PORT || "5000";
+const envVariables = loadEnvVariables();
+
+const PORT: string = envVariables.PORT || "5000";
 
 app.use('/', healthRouter);
 app.use('/dialogflow', dialogflowRouter);

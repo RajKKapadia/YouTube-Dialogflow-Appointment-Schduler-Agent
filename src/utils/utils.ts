@@ -1,13 +1,9 @@
 import dotenv from "dotenv";
-import fs from "fs";
 
 dotenv.config();
 
 export const loadEnvVariables = (envPath: string = '.env'): Record<string, string> => {
-    if (!fs.existsSync(envPath)) {
-        throw new Error(`.env file not found at ${envPath}`);
-    }
-    const result = dotenv.config({ path: envPath });
+    const result = dotenv.config();
     if (result.error) {
         throw result.error;
     }
